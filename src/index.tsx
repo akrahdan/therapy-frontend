@@ -1,5 +1,6 @@
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
+import 'proxy-polyfill'
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
