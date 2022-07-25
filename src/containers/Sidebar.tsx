@@ -57,19 +57,19 @@ export const Sidebar = () => {
             </InputGroup>
             <Stack spacing="1">
               <NavButton
-                to="/"
+                to="#/"
                 label="Home"
                 icon={FiCamera}
                 aria-current="page"
               />
-              <NavButton to="/songs" label="Songs" icon={FiMusic} />
-              <NavButton to="/residents" label="Residents" icon={FiUsers} />
-              <NavButton to="/events" label="Events" icon={FiCalendar} />
+              <NavButton to="#/songs" label="Songs" icon={FiMusic} />
+              <NavButton to="#/residents" label="Residents" icon={FiUsers} />
+              <NavButton to="#/events" label="Events" icon={FiCalendar} />
             </Stack>
           </Stack>
           <Stack spacing={{ base: "5", sm: "6" }}>
             <Stack spacing="1">
-              <NavButton to="/settings" label="Settings" icon={FiSettings} />
+              <NavButton to="#/settings" label="Settings" icon={FiSettings} />
             </Stack>
             <ButtonGroup size="sm" isAttached variant="outline" onClick={onLogout}>
               <Button>Logout</Button>

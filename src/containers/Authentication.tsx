@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Spinner } from "@chakra-ui/react"
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch } from "store/hooks";
 import { setCredentials } from "state/auth/authSlice";
 import { useAuth } from "store/useAuth";
@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = async ( email: string, password: string) => {
     try {
-      console.log("Email: ", email, 'pass: ', password)
+      localStorage.removeItem("token")
+     
       const response = await login({ identifier: email, password }).unwrap();
       localStorage.setItem("token", response.jwt);
       dispatch(setCredentials({ user: response.user, token: response.jwt }));
@@ -58,6 +59,7 @@ export const ProtectedRoute = ({ children}) => {
 
     const dispatch = useAppDispatch();
     const [userProfile, setUserProfile] =  React.useState<User>()
+    const [ searchParams, setSearchParams] = useSearchParams();
     const { data: currentUser, isLoading} = useGetCurrentUserQuery();
 
    
@@ -79,7 +81,9 @@ export const ProtectedRoute = ({ children}) => {
 
 
     if(!user) {
-        return <Navigate to='/signin' replace state={{ state: location}} />
+      //  setSearchParams({ id: 'signin' })
+      return <Navigate to='#/signin' replace state={{ state: location}} />
     }
+    
     return children;
 }

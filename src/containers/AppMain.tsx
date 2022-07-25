@@ -19,7 +19,7 @@ import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 import { images } from "./_data";
 import { Gallery } from "./Gallery";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useSearchParams, useLocation } from "react-router-dom";
 import { AuthProvider, ProtectedRoute } from "./Authentication";
 import { Dashboard } from "./Dashboard";
 import { Video } from "./Video";
@@ -30,7 +30,33 @@ import { Signin } from "./Signup/Signin";
 import { Event } from "./Event";
 import { useEffect, useState } from "react";
 import { useAuth } from "store/useAuth";
-import { useGetCurrentUserQuery, User } from "services/auth";
+// import { useGetCurrentUserQuery, User } from "services/auth";
+
+
+const NavPages = {
+  '#/signin': Signin,
+  '/#songs': Video,
+  '#/home': Events,
+  '#/events': Event,
+  '#/residents': Resident
+}
+
+
+const MainPage = (props) => {
+  // const [ searchParams, setSearchParams] = useSearchParams();
+  const  {hash } = useLocation()
+  
+  const Page = NavPages[hash] || NavPages["#/home"]
+
+  if (hash == "#/signin") {
+    return <Page { ...props} />
+  }
+  return (
+    <ProtectedRoute>
+       <Page { ...props} />
+    </ProtectedRoute>
+  )
+}
 
 export const AppMain = () => {
   const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -50,50 +76,7 @@ export const AppMain = () => {
           overflowY="auto"
         >
           {user ? isDesktop ? <Sidebar /> : <Navbar /> : null}
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Events />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/songs"
-              element={
-                <ProtectedRoute>
-                  <Video />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/residents"
-              element={
-                <ProtectedRoute>
-                  <Resident />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/resident/events"
-              element={
-                <ProtectedRoute>
-                  <Events />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/signin" element={<Signin />} />
-            <Route
-              path="/events"
-              element={
-                <ProtectedRoute>
-                  <Event />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route path="/resident/new" element={<NewResident />} /> */}
-          </Routes>
+          <MainPage />
         </Flex>
       </AuthProvider>
     </Router>
