@@ -65,9 +65,6 @@ export const ResidentTable = (props: TableProps) => {
             </Td>
 
             <Td>
-              <Text color="muted">{member.id}</Text>
-            </Td>
-            <Td>
               <Text color="muted">{member.ResidentId}</Text>
             </Td>
             <Td>

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { stat } from "fs";
 
 import { Resident, residentApi } from "services/resident";
 import { RootState } from "store";

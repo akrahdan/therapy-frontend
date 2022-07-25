@@ -13,12 +13,17 @@ import {
 } from '@chakra-ui/react'
 import * as React from 'react'
 import cookie from 'react-cookies'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { LogoIcon } from './Logo'
+import { useAuthenticate } from 'containers/Authentication'
 import { GoogleIcon } from './ProviderIcons'
 import { setCredentials } from 'state/auth/authSlice'
 import { useLoginMutation } from 'services/auth'
 
+interface SigninProps extends StackProps {
+  handleRedirect?: (val: boolean) => void
+}
 
 
 
@@ -26,23 +31,18 @@ export const SignInForm = (props: StackProps) => {
   const isMobile = useBreakpointValue({ base: true, md: false })
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
-  const dispatch = useAppDispatch();
-  const [login, { data, error} ] = useLoginMutation();
+  const { onLogin } = useAuthenticate();
+  
+ 
 
 
   const handleSubmit = async () => {
     if (password && email) {
-      try {
-        const response = await login({identifier: email, password}).unwrap();
-        
-        localStorage.setItem('token', response.jwt);
-        dispatch(setCredentials({ user: response.user, token: response.jwt}))
-      } catch (error) {
-        console.log("Error: ", error)
-      }
-
+       await onLogin(email, password);
     }
   }
+
+  
   return (
     <Stack spacing="8" {...props}>
       <Stack spacing="6">

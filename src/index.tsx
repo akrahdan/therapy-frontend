@@ -1,6 +1,8 @@
-import { ColorModeScript } from "@chakra-ui/react"
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
+import { BrowserRouter } from "react-router-dom"
 import { App } from "./App"
 import reportWebVitals from "./reportWebVitals"
 import * as serviceWorker from "./serviceWorker"
@@ -14,7 +16,7 @@ const root = ReactDOM.createRoot(container)
 
 root.render(
   <Provider store={store}>
-    <App />
+      <App />
   </Provider>
  
 )
