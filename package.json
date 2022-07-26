@@ -41,7 +41,7 @@
     "react-dom": "^18.1.0",
     "react-dropzone": "^14.2.2",
     "react-graceful-unmount": "^1.0.7",
-    "react-icons": "^3.0.0",
+    "react-icons": "^4.4.0",
     "react-joystick-component": "^4.0.1",
     "react-markdown": "^8.0.3",
     "react-player": "^2.10.1",
