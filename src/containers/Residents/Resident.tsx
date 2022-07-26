@@ -28,7 +28,7 @@ import {
   ModalContent,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+// import { AddIcon } from "@chakra-ui/icons";
 import * as React from "react";
 import { FiSearch, FiPlus, FiDownloadCloud } from "react-icons/fi";
 import { ResidentTable } from "./ResidentTable";
